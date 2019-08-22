@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>JQuery</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<style>
+#flip,#flip2,#panel{
+padding:4px;
+text-align:center;
+background-color:pink;
+border: 1px solid red;}
+#panel{
+padding:40px;
+}
+#panel2{
+padding:40px;
+display: none;
+}
+
+</style>
+</head>
+<body>
+<br><br><br><br><br>
+
+<div id="flip">Click the slide
+
+</div>
+<div id="panel">Welcome you all!!!!!!!!!!!!!
+</div>
+
+<br><br><br><br>
+
+<div id="flip2">Click the slide --> To Show image down slowly
+
+</div>
+
+<div id="panel2" align="center">
+	<img width="50%" src="images/3.jpg"></img>
+</div>
+
+
+
+
+
+<script>
+$(document).ready(function(){
+
+$("#flip").click(function(){
+$("#panel").slideUp("slow");
+});
+
+$("#flip2").click(function(){
+$("#panel2").slideDown("slow");
+});
+});
+
+
+</script>
+
+</body>
+</html>
