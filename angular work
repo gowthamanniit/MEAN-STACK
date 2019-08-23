@@ -1,0 +1,54 @@
+hero.ts
+=======
+export class Hero{
+    id:number;
+    name:string;
+}
+
+heroes.component.cs
+===================
+import { Component, OnInit } from '@angular/core';
+import {Hero} from '../hero';
+@Component({
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
+})
+export class HeroesComponent implements OnInit {
+hero:Hero={
+  id:1,
+  name:'gowthaman'
+};
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+
+heroes.component.html
+=====================
+<p>heroes works!</p>
+<p>{{hero}}</p>
+<h2>{{hero:name}}Details</h2>
+<div><span>id:</span>{{hero:id}}</div>
+<div><span>name:</span>{{hero:name}}</div>
+
+app.component.cs
+================
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'gowthaman-angular-project';
+}
+
+app.component.html
+==================
+<h1> gowthaman</h1>
+<app-heroes></app-heroes>

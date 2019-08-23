@@ -1,0 +1,172 @@
+ng generate service hero
+
+
+import { Hero } from './hero';
+import { HEROES } from './mock-heroes';
+
+
+ng generate service messages
+
+
+ng generate component messages
+
+============================HERO.SERVICE.TS======================
+
+import { Injectable } from '@angular/core';
+import { Hero } from './hero';
+import { HEROES } from './mock-heroes';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HeroService {
+
+  constructor(private messageService:MessageService) { }
+
+  getHeroes():Observable<Hero[]> {
+    this.messageService.add('HeroService: fetched heroes');
+    return of(HEROES);
+  }
+}
+
+
+==============MESSAGE.SERVICE.TS =========================
+import { Injectable } from '@angular/core';
+import { Hero } from './hero';
+import { HEROES } from './mock-heroes';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HeroService {
+
+  constructor(private messageService:MessageService) { }
+
+  getHeroes():Observable<Hero[]> {
+    this.messageService.add('HeroService: fetched heroes');
+    return of(HEROES);
+  }
+}import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MessagesService {
+messages: string[]=[];
+
+add(message:string){
+  this.messages.push(message);
+}
+
+clear(){
+  this.messages=[];
+}
+
+}
+
+=============HEROES.COMPONENT.TS=============================
+import { Component, OnInit } from '@angular/core';
+import { Hero } from '../hero';
+import { HeroService } from '../hero.service';
+
+@Component({
+  selector: 'app-heroes',
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.css']
+})
+
+export class HeroesComponent implements OnInit {
+
+  heroes : Hero[];
+  selectedHero: Hero;
+
+  constructor(private heroService: HeroService) { }
+
+  ngOnInit() {
+    this.getHeroes();
+  }
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
+
+  getHeroes():void{
+    this.heroService.getHeroes().subscribe(heroes => this.heroes=heroes);
+  }
+}
+===============MESSAGE.COMPONENT.TS====================
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from '../message.service';
+
+
+@Component({
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrls: ['./messages.component.css']
+})
+export class MessagesComponent implements OnInit {
+
+  constructor(public messageService: MessageService) { }
+
+  ngOnInit() {
+  }
+
+}
+==================MESSAGE.COMPONENT.HTML==================
+<div *ngIf="messageService.message.length">
+    <h2>Message</h2>
+    <button class="clear"
+    (click)="messageService.clear()">
+Clear</button>
+
+<div *ngFor='let message of 
+messageService.messages'>{{message}}
+
+</div>
+
+
+</div>
+==================MESSAGE.COMPONENT.CSS========================
+h2{
+    color:red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: lighter;
+}
+body{
+    margin: 2em;}
+body,input[text],button{
+    color: crimson;
+
+}
+button.clear{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: azure;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    cursor:hand;
+}
+button:hover{
+background-color: blue;
+}
+button:disabled{
+    background-color: bisque;
+    color: aquamarine;
+    cursor: auto;
+}
+button:clear{
+    color: chocolate;
+    margin-bottom: 10px;
+}
+
+app.component.html
+====================
+<app-messages></app-messages>
+
+app.module.ts
+==================
+
+import { MessagesComponent } from './messages/messages.component';
+

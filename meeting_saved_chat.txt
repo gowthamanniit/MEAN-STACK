@@ -1,0 +1,39 @@
+14:11:41	 From  Gowthaman  to  Anupriyan kumar(Privately) : sir share code
+14:11:58	 From  Minaxi(Livewire Chembur) : sir can you please explain steps again
+14:12:23	 From  ARCHANA : s
+14:12:24	 From  Akshaya Suresh : yess
+14:45:13	 From  Anupriyan kumar : import { Component, OnInit } from '@angular/core';import { Hero } from '../hero';import { HEROES } from '../mock-heroes';@Component({  selector: 'app-heroes',  templateUrl: './heroes.component.html',  styleUrls: ['./heroes.component.css']})export class HeroesComponent implements OnInit {  heroes = HEROES;  selectedHero: Hero;  constructor() { }  ngOnInit() {  }  onSelect(hero: Hero): void {    this.selectedHero = hero;  }}
+14:56:53	 From  Minaxi(Livewire Chembur) : same with me
+14:57:06	 From  Anupriyan kumar : <h1>My Heroes</h1><ul class="heroes">    <li *ngFor="let hero of heroes"     [class.selected]="hero===selectedHero"    (click)="onSelect(hero)">    <span class="badge">        {{hero.id}}    </span>{{hero.name}}    </li></ul><div *ngIf="selectedHero">   <h2>      {{selectedHero.name | uppercase}} Details   </h2>   <div><span>id:</span>{{selectedHero.id}}</div>        <div>       <label>name:           <input [(ngModel)]="selectedHero.name" placeholder="name"/>       </label>   </div></div>
+14:59:00	 From  Minaxi(Livewire Chembur) : yes sir got it
+14:59:08	 From  Minaxi(Livewire Chembur) : yes sir
+15:00:32	 From  Gowthaman  to  Anupriyan kumar(Privately) : yes sir
+15:00:41	 From  Gowthaman  to  Anupriyan kumar(Privately) : not sir
+15:00:51	 From  Gowthaman  to  Anupriyan kumar(Privately) : net problem upto 2.00 pm
+15:01:12	 From  Gowthaman  to  Anupriyan kumar(Privately) : ok sir
+15:01:39	 From  Krishnadas Livewire Ayyappankavu : note down the codes
+15:03:52	 From  Anupriyan kumar : ng generate component hero-detail 
+15:06:07	 From  Anupriyan kumar : <div *ngIf="hero">    <h2>       {{hero.name | uppercase}} Details    </h2>     <div><span>id:</span>{{hero.id}}</div>          <div>        <label>name:            <input [(ngModel)]="hero.name" placeholder="name"/>        </label>    </div>   </div>
+15:08:13	 From  Anupriyan kumar : @Input() here:Hero;
+15:11:14	 From  Anupriyan kumar : <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+15:20:00	 From  Anupriyan kumar : import { Component, OnInit, Input } from '@angular/core';import { Hero } from '../hero';@Component({  selector: 'app-hero-detail',  templateUrl: './hero-detail.component.html',  styleUrls: ['./hero-detail.component.css']})export class HeroDetailComponent implements OnInit {@Input() hero:Hero;  constructor() { }  ngOnInit() {  }}
+15:21:32	 From  Anupriyan kumar : import { Component, OnInit, Input } from '@angular/core';import { Hero } from '../hero';@Component({  selector: 'app-hero-detail',  templateUrl: './hero-detail.component.html',  styleUrls: ['./hero-detail.component.css']})export class HeroDetailComponent implements OnInit {@Input() hero:Hero;  constructor() { }  ngOnInit() {  }}
+15:26:11	 From  Minaxi(Livewire Chembur) : yes sir
+15:35:06	 From  Minaxi(Livewire Chembur) : yes sir
+15:36:03	 From  Minaxi(Livewire Chembur) : life of aplication
+15:36:56	 From  Minaxi(Livewire Chembur) : organise and share logic models
+15:40:34	 From  Anupriyan kumar : ng generate service hero
+15:42:45	 From  Anupriyan kumar : import { Hero } from './hero';import { HEROES } from './mock-heroes';
+15:46:57	 From  Anupriyan kumar : ng generate service messages
+15:48:09	 From  Anupriyan kumar : ng generate component messages
+15:49:23	 From  brighty : yes
+15:49:23	 From  Minaxi(Livewire Chembur) : yes sir
+15:54:37	 From  Anupriyan kumar : import { Injectable } from '@angular/core';import { Hero } from './hero';import { HEROES } from './mock-heroes';import { Observable, of } from 'rxjs';@Injectable({  providedIn: 'root'})export class HeroService {  constructor(private messageService:MessageService) { }  getHeroes():Observable<Hero[]> {    this.messageService.add('HeroService: fetched heroes');    return of(HEROES);  }}
+15:57:46	 From  Anupriyan kumar : import { Injectable } from '@angular/core';@Injectable({  providedIn: 'root'})export class MessagesService {messages: string[]=[];add(message:string){  this.messages.push(message);}clear(){  this.messages=[];}}
+15:59:32	 From  Minaxi(Livewire Chembur) : done sir
+16:06:02	 From  Anupriyan kumar : import { Component, OnInit } from '@angular/core';import { Hero } from '../hero';import { HeroService } from '../hero.service';@Component({  selector: 'app-heroes',  templateUrl: './heroes.component.html',  styleUrls: ['./heroes.component.css']})export class HeroesComponent implements OnInit {  heroes : Hero[];  selectedHero: Hero;  constructor(private heroService: HeroService) { }  ngOnInit() {    this.getHeroes();  }  onSelect(hero: Hero): void {    this.selectedHero = hero;  }  getHeroes():void{    this.heroService.getHeroes().subscribe(heroes => this.heroes=heroes);  }}
+16:06:56	 From  Minaxi(Livewire Chembur) : yes sir
+16:09:46	 From  Anupriyan kumar : import { Component, OnInit } from '@angular/core';import { MessageService } from '../message.service';@Component({  selector: 'app-messages',  templateUrl: './messages.component.html',  styleUrls: ['./messages.component.css']})export class MessagesComponent implements OnInit {  constructor(public messageService: MessageService) { }  ngOnInit() {  }}
+16:10:40	 From  sandhiya poonamallee : done
+16:15:14	 From  Anupriyan kumar : <div *ngIf="messageService.message.length">    <h2>Message</h2>    <button class="clear"    (click)="messageService.clear()">Clear</button><div *ngFor='let message of messageService.messages'>{{message}}</div></div>
+16:20:26	 From  Anupriyan kumar : h2{    color:red;    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;    font-weight: lighter;}body{    margin: 2em;}body,input[text],button{    color: crimson;}button.clear{    font-family: Arial, Helvetica, sans-serif;    background-color: azure;    border: none;    padding: 5px 10px;    cursor: pointer;    cursor:hand;}button:hover{background-color: blue;}button:disabled{    background-color: bisque;    color: aquamarine;    cursor: auto;}button:clear{    color: chocolate;    margin-bottom: 10px;}
