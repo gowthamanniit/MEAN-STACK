@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>signup Form</title>
+
+	<style type="text/css">
+		a
+		{
+			text-decoration: none;
+		}
+		table
+		{
+			border: 3px solid blue;
+			border-radius: 10px;
+		}
+
+	</style>
+<script type="text/javascript">
+		function checkpassword()
+		{
+			//alert("test");
+			var pass=document.sulogin.p.value;
+			var cpass=document.sulogin.cp.value;
+			var un=document.sulogin.un.value;
+			var em=document.sulogin.em1.value;
+			//alert(pass.length);
+			if(pass.lenght==0 || pass==null || pass=="")
+			{
+				document.getElementById("i2").src="images/cross.jpg";
+				document.getElementById("s2").innerHTML="<font color='red'>* Must Fill</font>";			
+			}
+			if(cpass.lenght==0 || cpass==null || cpass=="")
+			{
+				document.getElementById("i3").src="images/cross.jpg";
+				document.getElementById("s3").innerHTML="<font color='red'>* Must Fill</font>";			
+			}
+			if(un.lenght==0 || un==null || un=="")
+			{
+				document.getElementById("i1").src="images/cross.jpg";
+				document.getElementById("s1").innerHTML="<font color='red'>* Must Fill</font>";			
+			}
+			if(em.lenght==0 || em==null || em=="")
+			{
+				document.getElementById("i4").src="images/cross.jpg";
+				document.getElementById("s4").innerHTML="<font color='red'>* Must Fill</font>";			
+			}
+			
+			if(pass==cpass && pass!="" && cpass!="")
+			{
+				//alert("accepted");
+				
+				document.getElementById("i2").src="images/tick.jpg";
+				document.getElementById("s2").innerHTML="<font color='green'>Accept Password</font>";
+				document.getElementById("i3").src="images/tick.jpg";
+				document.getElementById("s3").innerHTML="<font color='green'>Accept Password</font>";
+				//return true;
+			}
+			if(pass!=cpass && pass.length>0 && cpass.length>0)
+			{
+				//alert("password and confirm password does not matched");
+				document.getElementById("i2").src="images/cross.jpg";
+				document.getElementById("s2").innerHTML="<font color='red'>Does Not Match</font>";
+				document.getElementById("i3").src="images/cross.jpg";
+				document.getElementById("s3").innerHTML="<font color='red'>Does Not Match</font>";
+				//return false;
+			}
+
+			if(un!="")
+			{
+				document.getElementById("i1").src="images/tick.jpg";
+				document.getElementById("s1").innerHTML="<font color='green'>Accept username</font>";
+			}
+			if(em!="")
+			{
+				document.getElementById("i4").src="images/tick.jpg";
+				document.getElementById("s4").innerHTML="<font color='green'>Accept Email</font>";
+			}
+
+		
+		}
+	</script>
+</head>
+<body>
+<center><h2> SignUp Form </h2></center>
+	<div align="center">
+	<form name="sulogin">		
+		<table cellpadding="10">
+			<tr>
+			<th>UserName</th>
+			<th><input type="text" name="un" ></th>
+			<th><img src="" width="25px" id="i1"></img></th>
+			<th><span id="s1"></span></th>
+			</tr>
+			<tr>
+			<th>password</th>
+			<th><input type="password" name="p"></th>
+			<th><img src=""  width="25px" id="i2"></img></th>
+			<th><span id="s2"></span></th>
+			</tr>
+			<tr>
+			<th>Confirm Password</th>
+			<th><input type="password"  name="cp"></th>
+			<th><img width="25px" src="" id="i3"></img></th>
+			<th><span id="s3"></span></th>
+			</tr>
+			<tr>
+			<th>Email</th>
+			<th><input type="email" name="em1"></th>
+			<th><img src="" width="25px" id="i4"></img></th>
+			<th><span id="s4"></span></th>
+			</tr>
+			<th></th><th><button type="button" onclick="checkpassword()">Submit</button></th>
+			</tr>			
+		</table>
+	</form>
+</div>
+
+</body>
+</html>
